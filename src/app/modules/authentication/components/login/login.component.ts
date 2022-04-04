@@ -1,14 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ResponseLoginMutation } from 'src/utils/mutations/responses';
+import { AuthService } from '../../services/auth.service';
+import { Apollo } from 'apollo-angular';
+import {
+  LOG_IN_MUTATION,
+  SIGN_UP_MUTATION
+} from 'src/utils/mutations/mutations';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginComponent implements OnInit {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
+export class LoginComponent {
+  showMessages = {};
+  errors: string[] = [];
+  messages: string[] = [];
+  submitted = false;
+  rememberMe = false;
+  redirectDelay = 0;
+  user = {
+    email: '',
+    password: ''
+  };
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  ngOnInit(): void {}
+  constructor(protected authService: AuthService, private apollo: Apollo) {}
+
+  login(): void {
+    this.apollo
+      .mutate<ResponseLoginMutation>({
+        mutation: LOG_IN_MUTATION,
+        variables: {
+          email: this.user.email,
+          password: this.user.password
+        }
+      })
+      .subscribe(({ data }) => {
+        console.log(data);
+      });
+  }
+
+  saveUserData(id: string, token: string) {
+    this.authService.saveUserData(id, token);
+  }
 }

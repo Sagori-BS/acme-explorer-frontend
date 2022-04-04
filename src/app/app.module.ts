@@ -33,8 +33,9 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 
 // pipes
-import { LocalizedDataPipe } from './pipes/localized-data.pipe';
+import { LocalizedDataPipe } from '../utils/pipes/localized-data.pipe';
 import { NgxTranslateModule } from './modules/translate/translate.module';
+import { AuthenticationModule } from './modules/authentication/authentication.module';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { NgxTranslateModule } from './modules/translate/translate.module';
     NbEvaIconsModule,
     NbContextMenuModule,
     NbButtonModule,
-    NbFormFieldModule
+    NbFormFieldModule,
+    AuthenticationModule
   ],
   providers: [
     {
