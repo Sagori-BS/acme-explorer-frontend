@@ -35,10 +35,12 @@
     </button>
   </div>
   <nb-user
-    name="gori"
-    title="el gorilongo"
+    shape="semi-round"
+    name="{{ currentUser.name }} {{ currentUser.lastName }}"
+    title="{{ currentUser.role }}"
     [showTitle]="false"
+    [picture]="currentUser.profilePicture!"
+    [nbContextMenu]="items"
     *ngIf="isLoggedIn"
   ></nb-user>
-  <button nbButton [nbContextMenu]="items" *ngIf="isLoggedIn">Menu</button>
 </div>

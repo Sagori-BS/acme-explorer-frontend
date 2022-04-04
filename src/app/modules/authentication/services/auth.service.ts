@@ -5,6 +5,7 @@ import {
   STORAGE_USER,
   STORAGE_USER_ID
 } from 'src/utils/constants/user.constants';
+import { IUser } from 'src/app/shared/interfaces/user.interface';
 
 import { Apollo } from 'apollo-angular';
 import { ResponseLoginMutation } from 'src/utils/mutations/responses';
@@ -21,8 +22,17 @@ import {
 export class AuthService {
   private userId: string | null = null;
   private _isAuthenticated = new BehaviorSubject(false);
+  private currentUserSubject: BehaviorSubject<IUser>;
 
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo) {
+    this.currentUserSubject = new BehaviorSubject<IUser>(
+      JSON.parse(localStorage.getItem(STORAGE_USER) || '{}')
+    );
+  }
+
+  get getCurrentUser(): Observable<IUser> {
+    return this.currentUserSubject.asObservable();
+  }
 
   // Providing a observable to listen the authentication state
   get isAuthenticated(): Observable<boolean> {

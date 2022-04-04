@@ -1,3 +1,4 @@
+import { IUser } from 'src/app/shared/interfaces/user.interface';
 import { Component, OnInit } from '@angular/core';
 import { filter } from 'rxjs/operators';
 
@@ -21,6 +22,7 @@ export class NavbarComponent implements OnInit {
   currentTheme!: string;
   siteLanguage!: string;
   isLoggedIn = false;
+  currentUser!: IUser;
 
   languageList = [
     {
@@ -58,6 +60,10 @@ export class NavbarComponent implements OnInit {
     // logged in
     this.authService.isAuthenticated.subscribe((isLoggedIn) => {
       this.isLoggedIn = isLoggedIn;
+    });
+
+    this.authService.getCurrentUser.subscribe((user) => {
+      this.currentUser = user;
     });
   }
 
