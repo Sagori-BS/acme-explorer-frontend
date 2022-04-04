@@ -2,10 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ResponseLoginMutation } from 'src/utils/mutations/responses';
 import { AuthService } from '../../services/auth.service';
 import { Apollo } from 'apollo-angular';
-import {
-  LOG_IN_MUTATION,
-  SIGN_UP_MUTATION
-} from 'src/utils/mutations/mutations';
+import { LOG_IN_MUTATION } from 'src/utils/mutations/mutations';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +33,16 @@ export class LoginComponent {
         }
       })
       .subscribe(({ data }) => {
-        console.log(data);
+        console.log(data?.signInUser);
+
+        if (data === undefined || data === null) {
+          this.errors.push('Error');
+        } else {
+          this.saveUserData(
+            data.signInUser.user.id,
+            data.signInUser.accessToken
+          );
+        }
       });
   }
 
