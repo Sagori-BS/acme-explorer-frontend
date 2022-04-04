@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from '../../components/home/home.component';
 
-import { NbRegisterComponent } from '@nebular/auth';
 import { LoginComponent } from '../authentication/components/login/login.component';
+import { RegisterComponent } from './../authentication/components/register/register.component';
 
 const routes: Routes = [
   {
@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    component: NbRegisterComponent
+    component: RegisterComponent
   },
   { path: '**', redirectTo: 'home' }
 ];
