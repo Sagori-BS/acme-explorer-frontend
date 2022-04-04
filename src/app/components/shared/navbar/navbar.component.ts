@@ -10,7 +10,6 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import { Languages } from 'src/app/shared/enums/languages.enum';
 import { AuthService } from 'src/app/modules/authentication/services/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -40,8 +39,7 @@ export class NavbarComponent implements OnInit {
     private readonly sidebarService: NbSidebarService,
     private readonly themeService: NbThemeService,
     private readonly translateService: TranslateService,
-    private readonly menuService: NbMenuService,
-    private router: Router
+    private readonly menuService: NbMenuService
   ) {
     // theme
     this.themeService.onThemeChange().subscribe(({ name }) => {
@@ -60,10 +58,6 @@ export class NavbarComponent implements OnInit {
     // logged in
     this.authService.isAuthenticated.subscribe((isLoggedIn) => {
       this.isLoggedIn = isLoggedIn;
-
-      if (isLoggedIn) {
-        this.router.navigate(['/']);
-      }
     });
   }
 

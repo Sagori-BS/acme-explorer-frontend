@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ResponseLoginMutation } from 'src/utils/mutations/responses';
 import { AuthService } from '../../services/auth.service';
@@ -20,23 +21,26 @@ export class LoginComponent {
     password: ''
   };
 
-  constructor(protected authService: AuthService) {}
+  constructor(protected authService: AuthService, private router: Router) {}
 
   saveUserData(data: ResponseLoginMutation) {
     this.authService.saveUserData(data);
   }
 
   login(): void {
-    this.authService.login(this.user.email, this.user.password).subscribe(
-      ({ data }) => {
+    this.authService.login(this.user.email, this.user.password).subscribe({
+      next: ({ data }) => {
         if (!(data === undefined || data === null)) {
           this.saveUserData(data);
         }
       },
-      (error) => {
-        this.errors.push('Error');
-        console.error(error);
+      error: (err) => {
+        console.error(err);
+        this.errors.push(err);
+      },
+      complete: () => {
+        this.router.navigate(['/']);
       }
-    );
+    });
   }
 }
