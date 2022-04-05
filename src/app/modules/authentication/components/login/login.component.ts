@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ResponseLoginMutation } from 'src/utils/mutations/responses';
 import { AuthService } from '../../services/auth.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +12,13 @@ import { FormBuilder } from '@angular/forms';
 })
 export class LoginComponent {
   loginForm = this.fb.group({
-    email: [''],
-    password: ['']
+    email: ['', [Validators.required, Validators.email]],
+    password: [
+      '',
+      [Validators.required, Validators.minLength(6), Validators.maxLength(40)]
+    ]
   });
+  submitted = false;
   errors: string[] = [];
 
   constructor(
@@ -28,6 +32,7 @@ export class LoginComponent {
   }
 
   login(): void {
+    this.submitted = true;
     this.authService.login(this.loginForm.value).subscribe({
       next: ({ data }) => {
         if (!(data === undefined || data === null)) {
