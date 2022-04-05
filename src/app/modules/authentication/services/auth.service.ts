@@ -6,6 +6,10 @@ import {
   STORAGE_USER_ID
 } from 'src/utils/constants/user.constants';
 import { IUser } from 'src/app/shared/interfaces/user.interface';
+import {
+  BaseUserInput,
+  ExtendedUserInput
+} from './../../../shared/interfaces/user.interface';
 
 import { Apollo } from 'apollo-angular';
 import {
@@ -16,8 +20,6 @@ import {
   LOG_IN_MUTATION,
   SIGN_UP_MUTATION
 } from 'src/utils/mutations/mutations';
-
-import { ExtendedUserInput } from './../../../shared/interfaces/user.interface';
 
 /**
  * Common authentication service.
@@ -91,19 +93,19 @@ export class AuthService {
     }
   }
 
-  login(email: string, password: string) {
+  login(user: BaseUserInput) {
+    const { email, password } = user;
     return this.apollo.mutate<ResponseLoginMutation>({
       mutation: LOG_IN_MUTATION,
       variables: {
-        email: email,
-        password: password
+        email,
+        password
       }
     });
   }
 
   signup(user: ExtendedUserInput) {
     const { email, password, name, lastName, telephoneNumber, address } = user;
-
     return this.apollo.mutate<ResponseSignUpMutation>({
       mutation: SIGN_UP_MUTATION,
       variables: {

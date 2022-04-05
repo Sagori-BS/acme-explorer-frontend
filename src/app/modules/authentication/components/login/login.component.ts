@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ResponseLoginMutation } from 'src/utils/mutations/responses';
 import { AuthService } from '../../services/auth.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -10,25 +11,24 @@ import { AuthService } from '../../services/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent {
-  showMessages = {};
+  loginForm = this.fb.group({
+    email: [''],
+    password: ['']
+  });
   errors: string[] = [];
-  messages: string[] = [];
-  submitted = false;
-  rememberMe = false;
-  redirectDelay = 0;
-  user = {
-    email: '',
-    password: ''
-  };
 
-  constructor(protected authService: AuthService, private router: Router) {}
+  constructor(
+    protected authService: AuthService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
 
   saveUserData(data: ResponseLoginMutation) {
     this.authService.saveUserData(data);
   }
 
   login(): void {
-    this.authService.login(this.user.email, this.user.password).subscribe({
+    this.authService.login(this.loginForm.value).subscribe({
       next: ({ data }) => {
         if (!(data === undefined || data === null)) {
           this.saveUserData(data);

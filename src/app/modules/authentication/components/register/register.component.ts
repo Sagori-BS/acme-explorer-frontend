@@ -18,10 +18,7 @@ export class RegisterComponent {
     telephoneNumber: [''],
     address: ['']
   });
-
   errors: string[] = [];
-  messages: string[] = [];
-  submitted = false;
 
   constructor(
     protected authService: AuthService,
