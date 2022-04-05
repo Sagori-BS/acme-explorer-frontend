@@ -8,7 +8,10 @@ import {
 import { IUser } from 'src/app/shared/interfaces/user.interface';
 
 import { Apollo } from 'apollo-angular';
-import { ResponseLoginMutation } from 'src/utils/mutations/responses';
+import {
+  ResponseLoginMutation,
+  ResponseSignUpMutation
+} from 'src/utils/mutations/responses';
 import {
   LOG_IN_MUTATION,
   SIGN_UP_MUTATION
@@ -55,6 +58,15 @@ export class AuthService {
     this.setUserId(user.id);
   }
 
+  saveUserDataRegister(data: ResponseSignUpMutation) {
+    const { accessToken, user } = data.signUpUser;
+
+    localStorage.setItem(STORAGE_USER_ID, data.signUpUser.user.id);
+    localStorage.setItem(STORAGE_ACCESS_TOKEN, accessToken);
+    localStorage.setItem(STORAGE_USER, JSON.stringify(user));
+    this.setUserId(user.id);
+  }
+
   logout() {
     // Removing user data from local storage and the service
     localStorage.removeItem(STORAGE_USER_ID);
@@ -95,7 +107,8 @@ export class AuthService {
     telephoneNumber: string,
     address: string
   ) {
-    return this.apollo.mutate<ResponseLoginMutation>({
+    console.log(email, password, name, lastName, telephoneNumber, address);
+    return this.apollo.mutate<ResponseSignUpMutation>({
       mutation: SIGN_UP_MUTATION,
       variables: {
         email: email,
