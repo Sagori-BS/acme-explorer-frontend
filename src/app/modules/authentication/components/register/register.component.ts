@@ -27,10 +27,6 @@ export class RegisterComponent {
 
   constructor(protected authService: AuthService, private router: Router) {}
 
-  saveUserData(data: ResponseLoginMutation) {
-    this.authService.saveUserData(data);
-  }
-
   saveUserDataRegister(data: ResponseSignUpMutation) {
     this.authService.saveUserDataRegister(data);
   }
@@ -48,7 +44,6 @@ export class RegisterComponent {
       .subscribe({
         next: ({ data }) => {
           if (!(data === undefined || data === null)) {
-            console.log(data);
             this.saveUserDataRegister(data);
           }
         },
