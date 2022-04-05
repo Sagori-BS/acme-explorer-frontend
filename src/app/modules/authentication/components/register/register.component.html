@@ -7,131 +7,110 @@
   </p>
 </div>
 
-<form (ngSubmit)="register()" #form="ngForm" aria-labelledby="title">
+<form (ngSubmit)="register()" [formGroup]="registerForm">
   <nb-card>
     <nb-card-body class="register-card">
       <div>
-        <label class="label" for="input-email">Email address:</label>
+        <label class="label" for="email">Email address:</label>
         <input
           nbInput
           fullWidth
-          [(ngModel)]="user.email"
-          #email="ngModel"
+          type="text"
+          id="email"
           name="email"
-          id="input-email"
-          pattern=".+@.+\..+"
+          formControlName="email"
           placeholder="Email address"
           fieldSize="large"
           autofocus
           status="basic"
           required="true"
-          [attr.aria-invalid]="email.invalid && email.touched ? true : null"
         />
-        <ng-container *ngIf="email.invalid && email.touched"> </ng-container>
       </div>
       <div>
-        <label class="label" for="input-password">Password:</label>
+        <label class="label" for="password">Password:</label>
         <input
           nbInput
           fullWidth
-          [(ngModel)]="user.password"
-          #password="ngModel"
-          name="password"
           type="password"
-          id="input-password"
+          id="password"
+          name="password"
+          formControlName="password"
           placeholder="Password"
           fieldSize="large"
           status="basic"
-          [required]="true"
+          required="true"
           minlength="6"
           maxlength="40"
-          [attr.aria-invalid]="
-            password.invalid && password.touched ? true : null
-          "
         />
-        <ng-container *ngIf="password.invalid && password.touched">
-        </ng-container>
       </div>
       <div>
-        <label class="label" for="input-name">First Name:</label>
+        <label class="label" for="first-name">First Name:</label>
         <input
           nbInput
           fullWidth
-          [(ngModel)]="user.name"
-          #name="ngModel"
-          name="name"
-          id="input-name"
+          type="text"
+          id="first-name"
+          name="first-name"
+          formControlName="name"
           placeholder="First Name"
           fieldSize="large"
           status="basic"
-          [required]="true"
-          [attr.aria-invalid]="name.invalid && name.touched ? true : null"
+          required="true"
         />
-        <ng-container *ngIf="name.invalid && name.touched"> </ng-container>
       </div>
       <div>
-        <label class="label" for="input-lastName">Last Name:</label>
+        <label class="label" for="last-name">Last Name:</label>
         <input
           nbInput
           fullWidth
-          [(ngModel)]="user.lastName"
-          #lastName="ngModel"
-          name="lastName"
-          id="input-lastName"
+          type="text"
+          id="last-name"
+          name="last-name"
+          formControlName="lastName"
           placeholder="Last Name"
           fieldSize="large"
           status="basic"
-          [required]="true"
-          [attr.aria-invalid]="
-            lastName.invalid && lastName.touched ? true : null
-          "
+          required="true"
         />
-        <ng-container *ngIf="lastName.invalid && lastName.touched">
-        </ng-container>
       </div>
       <div>
-        <label class="label" for="input-phone">Phone number:</label>
+        <label class="label" for="phone-number">Phone Number:</label>
         <input
           nbInput
           fullWidth
-          [(ngModel)]="user.phone"
-          #phone="ngModel"
-          name="phone"
-          id="input-phone"
-          placeholder="Phone number"
+          type="text"
+          id="phone-number"
+          name="phone-number"
+          formControlName="telephoneNumber"
+          placeholder="Phone Number"
           fieldSize="large"
           status="basic"
-          [required]="false"
-          [attr.aria-invalid]="phone.invalid && phone.touched ? true : null"
+          required="false"
         />
-        <ng-container *ngIf="phone.invalid && phone.touched"> </ng-container>
       </div>
       <div>
-        <label class="label" for="input-address">Address:</label>
+        <label class="label" for="address">Address:</label>
         <input
           nbInput
           fullWidth
-          [(ngModel)]="user.address"
-          #address="ngModel"
+          type="text"
+          id="address"
           name="address"
-          id="input-address"
+          formControlName="address"
           placeholder="Address"
           fieldSize="large"
           status="basic"
-          [required]="false"
-          [attr.aria-invalid]="address.invalid && address.touched ? true : null"
+          required="false"
         />
-        <ng-container *ngIf="address.invalid && address.touched">
-        </ng-container>
       </div>
 
       <button
         nbButton
         fullWidth
+        type="submit"
         status="primary"
         size="large"
-        [disabled]="submitted || !form.valid"
-        [class.btn-pulse]="submitted"
+        [disabled]="!registerForm.valid"
       >
         Sign Up
       </button>

@@ -17,6 +17,8 @@ import {
   SIGN_UP_MUTATION
 } from 'src/utils/mutations/mutations';
 
+import { ExtendedUserInput } from './../../../shared/interfaces/user.interface';
+
 /**
  * Common authentication service.
  * Should be used to as an interlayer between UI Components and Auth Strategy.
@@ -52,7 +54,7 @@ export class AuthService {
   saveUserData(data: ResponseLoginMutation) {
     const { accessToken, user } = data.signInUser;
 
-    localStorage.setItem(STORAGE_USER_ID, data.signInUser.user.id);
+    localStorage.setItem(STORAGE_USER_ID, user.id);
     localStorage.setItem(STORAGE_ACCESS_TOKEN, accessToken);
     localStorage.setItem(STORAGE_USER, JSON.stringify(user));
     this.setUserId(user.id);
@@ -61,7 +63,7 @@ export class AuthService {
   saveUserDataRegister(data: ResponseSignUpMutation) {
     const { accessToken, user } = data.signUpUser;
 
-    localStorage.setItem(STORAGE_USER_ID, data.signUpUser.user.id);
+    localStorage.setItem(STORAGE_USER_ID, user.id);
     localStorage.setItem(STORAGE_ACCESS_TOKEN, accessToken);
     localStorage.setItem(STORAGE_USER, JSON.stringify(user));
     this.setUserId(user.id);
@@ -99,24 +101,18 @@ export class AuthService {
     });
   }
 
-  signup(
-    email: string,
-    password: string,
-    name: string,
-    lastName: string,
-    telephoneNumber: string,
-    address: string
-  ) {
-    console.log(email, password, name, lastName, telephoneNumber, address);
+  signup(user: ExtendedUserInput) {
+    const { email, password, name, lastName, telephoneNumber, address } = user;
+
     return this.apollo.mutate<ResponseSignUpMutation>({
       mutation: SIGN_UP_MUTATION,
       variables: {
-        email: email,
-        password: password,
-        name: name,
-        lastName: lastName,
-        telephoneNumber: telephoneNumber,
-        address: address
+        email,
+        password,
+        name,
+        lastName,
+        telephoneNumber,
+        address
       }
     });
   }
