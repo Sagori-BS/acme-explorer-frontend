@@ -9,7 +9,7 @@ import { IUser } from 'src/app/shared/interfaces/user.interface';
 import {
   BaseUserInput,
   ExtendedUserInput
-} from './../../../shared/interfaces/user.interface';
+} from './../../../shared/types/user.type';
 
 import { Apollo } from 'apollo-angular';
 import {
