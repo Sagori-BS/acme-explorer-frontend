@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ResponseLoginMutation } from 'src/utils/mutations/responses';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'app-login',
@@ -19,12 +20,12 @@ export class LoginComponent {
     ]
   });
   submitted = false;
-  errors: string[] = [];
 
   constructor(
     protected authService: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastrService: NbToastrService
   ) {}
 
   saveUserData(data: ResponseLoginMutation) {
@@ -40,8 +41,12 @@ export class LoginComponent {
         }
       },
       error: (err) => {
+        this.toastrService.show(err.message, 'Error', {
+          duration: 3000,
+          status: 'danger'
+        });
+
         console.error(err);
-        this.errors.push(err);
       },
       complete: () => {
         this.router.navigate(['/']);

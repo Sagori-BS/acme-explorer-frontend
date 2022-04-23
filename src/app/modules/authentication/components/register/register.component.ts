@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'app-register',
@@ -25,12 +26,12 @@ export class RegisterComponent {
     address: ['']
   });
   submitted = false;
-  errors: string[] = [];
 
   constructor(
     protected authService: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastrService: NbToastrService
   ) {}
 
   saveUserDataRegister(data: ResponseSignUpMutation) {
@@ -46,8 +47,12 @@ export class RegisterComponent {
         }
       },
       error: (err) => {
+        this.toastrService.show(err.message, 'Error', {
+          duration: 3000,
+          status: 'danger'
+        });
+
         console.error(err);
-        this.errors.push(err);
       },
       complete: () => {
         this.router.navigate(['/']);

@@ -16,7 +16,8 @@ import {
   NbSidebarModule,
   NbMenuModule,
   NbButtonModule,
-  NbUserModule
+  NbUserModule,
+  NbToastrModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -57,7 +58,8 @@ import { AuthenticationModule } from './modules/authentication/authentication.mo
     NbEvaIconsModule,
     NbContextMenuModule,
     NbButtonModule,
-    NbUserModule
+    NbUserModule,
+    NbToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
