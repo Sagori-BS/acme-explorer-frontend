@@ -75,7 +75,14 @@
           </p>
         </div>
       </div>
-      <button nbButton fullWidth type="submit" status="primary" size="large">
+      <button
+        nbButton
+        fullWidth
+        [disabled]="loginForm.invalid"
+        type="submit"
+        status="primary"
+        size="large"
+      >
         Login
       </button>
     </nb-card-body>

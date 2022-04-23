@@ -171,7 +171,14 @@
         </p>
       </div>
 
-      <button nbButton fullWidth type="submit" status="primary" size="large">
+      <button
+        nbButton
+        fullWidth
+        [disabled]="registerForm.invalid"
+        type="submit"
+        status="primary"
+        size="large"
+      >
         Sign Up
       </button>
     </nb-card-body>
