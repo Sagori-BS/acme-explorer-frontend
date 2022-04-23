@@ -31,6 +31,7 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 import { LocalizedDataPipe } from '../utils/pipes/localized-data.pipe';
 import { NgxTranslateModule } from './modules/translate/translate.module';
 import { AuthenticationModule } from './modules/authentication/authentication.module';
+import { TripsModule } from './modules/trips/trips.module';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { AuthenticationModule } from './modules/authentication/authentication.mo
     NbEvaIconsModule,
     NbContextMenuModule,
     NbButtonModule,
-    NbUserModule
+    NbUserModule,
+    TripsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
