@@ -8,7 +8,7 @@
 </div>
 
 <form (ngSubmit)="login()" [formGroup]="loginForm">
-  <nb-card>
+  <nb-card [nbSpinner]="loading" nbSpinnerStatus="basic">
     <nb-card-body class="login-card">
       <div>
         <label class="label" for="email">Email address:</label>

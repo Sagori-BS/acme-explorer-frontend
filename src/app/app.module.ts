@@ -54,12 +54,12 @@ import { AuthenticationModule } from './modules/authentication/authentication.mo
     NbThemeModule.forRoot({
       name: localStorage.getItem('theme') ?? 'default'
     }),
+    NbToastrModule.forRoot(),
     NbLayoutModule,
     NbEvaIconsModule,
     NbContextMenuModule,
     NbButtonModule,
-    NbUserModule,
-    NbToastrModule.forRoot()
+    NbUserModule
   ],
   providers: [],
   bootstrap: [AppComponent]

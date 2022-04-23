@@ -20,6 +20,7 @@ export class LoginComponent {
     ]
   });
   submitted = false;
+  loading = false;
 
   constructor(
     protected authService: AuthService,
@@ -34,13 +35,16 @@ export class LoginComponent {
 
   login(): void {
     this.submitted = true;
+    this.loading = true;
+
     this.authService.login(this.loginForm.value).subscribe({
-      next: ({ data }) => {
+      next: ({ data, loading }) => {
         if (!(data === undefined || data === null)) {
           this.saveUserData(data);
         }
       },
       error: (err) => {
+        this.loading = false;
         this.toastrService.show(err.message, 'Error', {
           duration: 3000,
           status: 'danger'
@@ -49,6 +53,7 @@ export class LoginComponent {
         console.error(err);
       },
       complete: () => {
+        this.loading = false;
         this.router.navigate(['/']);
       }
     });

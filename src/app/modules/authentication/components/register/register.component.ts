@@ -26,6 +26,7 @@ export class RegisterComponent {
     address: ['']
   });
   submitted = false;
+  loading = false;
 
   constructor(
     protected authService: AuthService,
@@ -40,6 +41,8 @@ export class RegisterComponent {
 
   register(): void {
     this.submitted = true;
+    this.loading = true;
+
     this.authService.signup(this.registerForm.value).subscribe({
       next: ({ data }) => {
         if (!(data === undefined || data === null)) {
@@ -47,6 +50,7 @@ export class RegisterComponent {
         }
       },
       error: (err) => {
+        this.loading = false;
         this.toastrService.show(err.message, 'Error', {
           duration: 3000,
           status: 'danger'
@@ -55,6 +59,7 @@ export class RegisterComponent {
         console.error(err);
       },
       complete: () => {
+        this.loading = false;
         this.router.navigate(['/']);
       }
     });
