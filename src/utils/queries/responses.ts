@@ -1,4 +1,4 @@
-import { ITrip } from 'src/app/shared/interfaces/trip.interface';
+import { ITrip } from 'src/app/modules/trips/interfaces/trip.interface';
 
 export interface ResponseListTripsQuery {
   listTrips: {

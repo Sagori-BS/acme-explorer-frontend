@@ -1,6 +1,6 @@
-import { IBaseEntity } from './base-entity.interface';
+import { IBaseEntity } from 'src/app/shared/interfaces/base-entity.interface';
+import { IUser } from 'src/app/shared/interfaces/user.interface';
 import { IStage } from './stage.interface';
-import { IUser } from './user.interface';
 
 export interface ITrip extends IBaseEntity {
   title: string;
