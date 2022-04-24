@@ -2,14 +2,23 @@
   <nb-list
         nbInfiniteList
         listenWindowScroll
-        [threshold]="500"
+        [threshold]="1"
         (bottomThreshold)="loadNext()"
       >
-        <nb-list-item *ngFor="let newsPost of news">
-          <nb-news-post [post]="newsPost"></nb-news-post>
+        <nb-list-item *ngFor="let trip of trips">
+            <nb-card>
+              <nb-card-header>{{ trip.title }}</nb-card-header>
+              <nb-card-body>
+                  {{ trip.description }}
+                  <br>
+                  <br>
+                  <img class="img-responsive" src="{{ trip.pictures[0] }}" alt="{{ trip.title }}" />
+              </nb-card-body>
+              <nb-card-footer>
+                  <b>{{ 'card-trip.price' | translate }}:</b> {{ trip.price }}
+              </nb-card-footer>
+            </nb-card>
         </nb-list-item>
-        <nb-list-item *ngFor="let _ of placeholders">
-          <nb-news-post-placeholder></nb-news-post-placeholder>
-        </nb-list-item>
+
   </nb-list>
 </nb-card>
