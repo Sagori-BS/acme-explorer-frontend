@@ -1,4 +1,4 @@
-import { GraphQLModule } from './../graphql/graphql.module';
+import { GraphQLModule } from '../graphql/graphql.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -33,4 +33,4 @@ import { NgxTranslateModule } from '../translate/translate.module';
   providers: [NbLayoutRulerService, NbLayoutRulerService, ListTripsService],
   exports: [ListTripsComponent]
 })
-export class TripsModule {}
+export class TripModule {}
