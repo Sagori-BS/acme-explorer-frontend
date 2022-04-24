@@ -6,12 +6,17 @@ import {
   NbButtonModule,
   NbCardModule,
   NbFormFieldModule,
-  NbInputModule
+  NbInputModule,
+  NbLayoutRulerService,
+  NbListModule
 } from '@nebular/theme';
 import { AppRoutingModule } from '../routing/app-routing.module';
+import { ListTripsComponent } from './components/list-trips/list-trips.component';
+import { ListTripsService } from './components/list-trips/list-trips.service';
+import { NgxTranslateModule } from '../translate/translate.module';
 
 @NgModule({
-  declarations: [],
+  declarations: [ListTripsComponent],
   imports: [
     GraphQLModule,
     AppRoutingModule,
@@ -21,9 +26,11 @@ import { AppRoutingModule } from '../routing/app-routing.module';
     NbFormFieldModule,
     NbInputModule,
     NbButtonModule,
-    NbCardModule
+    NbCardModule,
+    NbListModule,
+    NgxTranslateModule
   ],
-  providers: [],
-  exports: []
+  providers: [NbLayoutRulerService, NbLayoutRulerService, ListTripsService],
+  exports: [ListTripsComponent]
 })
 export class TripsModule {}
