@@ -27,11 +27,14 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 
-// pipes
+// i18n
 import { LocalizedDataPipe } from '../utils/pipes/localized-data.pipe';
 import { NgxTranslateModule } from './modules/translate/translate.module';
+
+// custom modules
 import { AuthenticationModule } from './modules/authentication/authentication.module';
 import { TripModule } from './modules/trip/trip.module';
+import { ApplicationModule } from './modules/application/application.module';
 
 @NgModule({
   declarations: [
@@ -42,12 +45,14 @@ import { TripModule } from './modules/trip/trip.module';
     LocalizedDataPipe
   ],
   imports: [
+    ApplicationModule,
     AuthenticationModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     NgxTranslateModule,
+    TripModule,
     NbIconModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
@@ -58,8 +63,7 @@ import { TripModule } from './modules/trip/trip.module';
     NbEvaIconsModule,
     NbContextMenuModule,
     NbButtonModule,
-    NbUserModule,
-    TripModule
+    NbUserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
