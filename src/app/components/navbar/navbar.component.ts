@@ -113,7 +113,7 @@ export class NavbarComponent implements OnInit {
       }
 
       if (item.title === 'My Trips') {
-        this.router.navigate(['/self-trips']);
+        this.router.navigate(['/my-trips']);
       }
 
       if (item.title === 'My Trips Applications') {

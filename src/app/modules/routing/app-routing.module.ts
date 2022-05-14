@@ -33,7 +33,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'self-trips',
+    path: 'my-trips',
     component: SelfTripsComponent,
     canActivate: [AuthGuard],
     data: {
