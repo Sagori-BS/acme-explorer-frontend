@@ -1,8 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { FilterInputParams } from 'src/utils/inputs/filter-input-params';
-import { GET_SELF_APPLICATIONS } from 'src/utils/queries/queries';
-import { ResponseListApplicationsQuery } from 'src/utils/queries/responses';
+import {
+  GET_APPLICATIONS,
+  GET_SELF_APPLICATIONS
+} from 'src/utils/queries/queries';
+import {
+  ResponseGetApplicationsQuery,
+  ResponseListApplicationsQuery
+} from 'src/utils/queries/responses';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +20,7 @@ export class ApplicationService {
 
   constructor(private apollo: Apollo) {}
 
-  fetch(params?: FilterInputParams) {
+  getSelfApplications(params?: FilterInputParams) {
     if (params) {
       const { start, limit, where } = params;
       this.start = start || this.start;
@@ -26,6 +32,18 @@ export class ApplicationService {
       variables: {
         start: this.start,
         limit: this.limit,
+        where: this.where
+      }
+    });
+  }
+
+  getApplications(params?: FilterInputParams) {
+    if (params) {
+      this.where = params?.where;
+    }
+    return this.apollo.query<ResponseGetApplicationsQuery>({
+      query: GET_APPLICATIONS,
+      variables: {
         where: this.where
       }
     });

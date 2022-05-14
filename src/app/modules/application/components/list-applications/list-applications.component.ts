@@ -24,7 +24,7 @@ export class ListApplicationsComponent implements OnInit {
     this.loading = true;
     this.placeholders = new Array(this.pageSize);
     this.applicationService
-      .fetch({ limit: this.pageSize })
+      .getSelfApplications({ limit: this.pageSize })
       .subscribe(({ data }) => {
         this.placeholders = [];
         this.applications = data.getSelfApplications.data;

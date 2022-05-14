@@ -18,3 +18,7 @@ export interface ResponseListApplicationsQuery {
     data: IApplication[];
   };
 }
+
+export interface ResponseGetApplicationsQuery {
+  getApplications: IApplication[];
+}

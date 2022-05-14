@@ -42,6 +42,15 @@ export const GET_SELF_APPLICATIONS = gql`
   ${APPLICATION_DATA}
 `;
 
+export const GET_APPLICATIONS = gql`
+  query getApplications($start: Int, $limit: Int, $where: JSON) {
+    getApplications(input: { start: $start, limit: $limit, where: $where }) {
+      ...ApplicationData
+    }
+  }
+  ${APPLICATION_DATA}
+`;
+
 export const GET_TRIP = gql`
   query getTrip($id: ID!) {
     getTripById(id: $id) {
