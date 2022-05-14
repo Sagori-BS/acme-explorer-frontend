@@ -12,6 +12,7 @@ import { AuthGuard } from 'src/app/modules/authentication/auth.guard';
 import { ALL_ROLES, MANAGER, UserRoles } from 'src/utils/enums/user-roles.enum';
 import { ProfileComponent } from '../user/components/profile/profile.component';
 import { SelfTripsComponent } from '../trip/components/self-trips/self-trips.component';
+import { ManagerApplicationsComponent } from '../application/components/manager-applications/manager-applications.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'trips', pathMatch: 'full' },
@@ -34,6 +35,14 @@ const routes: Routes = [
   {
     path: 'self-trips',
     component: SelfTripsComponent,
+    canActivate: [AuthGuard],
+    data: {
+      expectedRoles: MANAGER
+    }
+  },
+  {
+    path: 'my-applications',
+    component: ManagerApplicationsComponent,
     canActivate: [AuthGuard],
     data: {
       expectedRoles: MANAGER

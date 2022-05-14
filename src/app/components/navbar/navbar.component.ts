@@ -1,5 +1,5 @@
 import { IUser } from 'src/utils/interfaces/user.interface';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { filter } from 'rxjs/operators';
 
 import { NbMenuItem, NbMenuService, NbThemeService } from '@nebular/theme';
@@ -32,6 +32,9 @@ export class NavbarComponent implements OnInit {
         { title: 'Profile' },
         {
           title: 'My Trips'
+        },
+        {
+          title: 'My Trips Applications'
         },
         { title: 'Logout' }
       ];
@@ -111,6 +114,10 @@ export class NavbarComponent implements OnInit {
 
       if (item.title === 'My Trips') {
         this.router.navigate(['/self-trips']);
+      }
+
+      if (item.title === 'My Trips Applications') {
+        this.router.navigate(['/my-applications']);
       }
     });
 
