@@ -7,7 +7,7 @@ import { ResponseListApplicationsQuery } from 'src/utils/queries/responses';
 @Injectable({
   providedIn: 'root'
 })
-export class ListApplicationsService {
+export class ApplicationService {
   start = 0;
   limit = 10;
   where: unknown = {};

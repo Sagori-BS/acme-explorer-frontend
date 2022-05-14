@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ListApplicationsService } from './list-applications.service';
+import { ApplicationService } from '../../application.service';
 import { IApplication } from '../../interfaces/application.interface';
 
 @Component({
@@ -14,7 +14,7 @@ export class ListApplicationsComponent implements OnInit {
   pageToLoadNext = 1;
   loading = false;
 
-  constructor(private listApplicationService: ListApplicationsService) {}
+  constructor(private applicationService: ApplicationService) {}
 
   loadNext() {
     if (this.loading) {
@@ -23,7 +23,7 @@ export class ListApplicationsComponent implements OnInit {
 
     this.loading = true;
     this.placeholders = new Array(this.pageSize);
-    this.listApplicationService
+    this.applicationService
       .fetch({ limit: this.pageSize })
       .subscribe(({ data }) => {
         this.placeholders = [];
