@@ -8,6 +8,9 @@ Run `npm install` to install all of the dependencies.
 
 Run `npm start` for a dev server. Navigate to `http://localhost:4200/`.
 
+## Live Deployment
+
+The app is deployed via [Netlify](https://www.netlify.com/) in the following [link](https://acmeexplorer.netlify.app).
 
 ## Build
 
