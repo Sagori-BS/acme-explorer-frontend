@@ -43,7 +43,10 @@ export class ListTripsComponent {
   loadNext() {
     this.loading = true;
     this.tripService
-      .fetch({ limit: this.pageSize, where: { state: TripState.ACTIVE } })
+      .fetch({
+        limit: this.pageSize,
+        where: { state: TripState.ACTIVE }
+      })
       .subscribe({
         next: ({ data }) => {
           this.trips = data.listTrips.data;

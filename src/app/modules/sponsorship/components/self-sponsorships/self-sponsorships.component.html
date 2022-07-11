@@ -71,8 +71,14 @@
 
           <div class="accordion-colum">
             <h6>{{ 'sponsorship.self-list.sponsor.name' | translate }}</h6>
-            <b> {{ 'sponsorship.self-list.sponsor.price' | translate }} </b>
-            4500
+
+            <span *ngIf="sponsorship.state == 'INACTIVE'">
+              <p>
+                <b>{{ 'sponsorship.self-list.sponsor.price' | translate }} </b>
+                {{ sponsorship.flatRate }}
+              </p>
+            </span>
+
             <br />
             <br />
             <button

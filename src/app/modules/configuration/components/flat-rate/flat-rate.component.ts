@@ -42,10 +42,14 @@ export class FlatRateComponent implements OnInit {
     ) {
       this.updateConfiguration();
     } else {
-      this.toastrService.show('An error just occurred', 'Error', {
-        duration: 3000,
-        status: 'danger'
-      });
+      this.toastrService.show(
+        'Flat rate must be a number between 1 and 9999',
+        'Error',
+        {
+          duration: 3000,
+          status: 'danger'
+        }
+      );
     }
   }
 
@@ -79,6 +83,7 @@ export class FlatRateComponent implements OnInit {
         },
         complete: () => {
           this.toastrService.success('Configuration updated successfully');
+          window.location.reload();
         }
       });
   }

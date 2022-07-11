@@ -95,12 +95,7 @@ export class CreateTripComponent {
           .toISOString()
           .split('T')[0],
         requirements: this.createTripForm.value.requirements.split('\n'),
-        stages: this.stages,
-        ...(this.createTripForm.value.pictures.length === 0 && {
-          pictures: [
-            'https://curbo-assets.nyc3.digitaloceanspaces.com/inspection/1652699329039-59578d4f-166b-4cc7-a257-4192ab2252a0.jpeg'
-          ]
-        })
+        stages: this.stages
       };
 
       delete createTripInput.dates;
@@ -131,7 +126,9 @@ export class CreateTripComponent {
             });
           },
           complete: () => {
-            this.router.navigate(['/trips/self']);
+            this.router.navigate(['/trips/self']).then(() => {
+              window.location.reload();
+            });
           }
         });
     } else {

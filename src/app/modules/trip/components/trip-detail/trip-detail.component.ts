@@ -129,6 +129,36 @@ export class TripDetailComponent implements OnInit {
   }
 
   editTrip(): void {
+    const startDate = new Date(this.trip?.startDate ?? this.currentDate);
+
+    // If trip is already started, show error
+    if (startDate < this.currentDate) {
+      this.toastrService.show(
+        'You cannot edit a trip that has already started',
+        'Error',
+        {
+          duration: 3000,
+          status: 'danger'
+        }
+      );
+      return;
+    }
+
+    // If trip is less than a week away, show warning
+    const diffInDays = differenceInDays(startDate, this.currentDate);
+    if (diffInDays < 7) {
+      this.toastrService.show(
+        'You cannot edit a trip that is less than a week away',
+        'Error',
+        {
+          duration: 3000,
+          status: 'danger'
+        }
+      );
+
+      return;
+    }
+
     this.dialogService
       .open(EditTripDialogComponent, {
         context: {
